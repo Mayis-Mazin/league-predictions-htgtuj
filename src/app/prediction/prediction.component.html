@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="example-container">
+    <h5>Predictions</h5>
+    
+    <div
+      cdkDropList
+      #predictionsList="cdkDropList"
+      [cdkDropListData]="predictions"
+      [cdkDropListConnectedTo]="[teamList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event, 'predictions')"
+    >
+  
+      <div class="example-box" *ngFor="let prediction of predictions; let i = index" cdkDrag [cdkDragDisabled]="!prediction.name">
+        <app-team [team]="prediction" [index]="i"></app-team>
+      </div>
+  
+    </div>
+  </div>
+  
+  <div class="example-container">
+    <h5>Teams</h5>
+  
+    <div
+      cdkDropList
+      #teamList="cdkDropList"
+      [cdkDropListData]="teams"
+      [cdkDropListConnectedTo]="[predictionsList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event, 'teams')"
+    >
+  
+    <div class="example-box" *ngFor="let team of teams;" cdkDrag>
+      <app-team [team]="team"></app-team>
+    </div>
+  
+    </div>
+  </div>
+  <button class="btn btn-success save" (click)="savePrediction()">Save Prediction</button>
+</div>
